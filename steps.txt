@@ -1,0 +1,9 @@
+- Clonar repositório do nestjs: git clone https://github.com/nestjs/typescript-starter.git NomeDiretorioApi
+- entrar no diretório clonado e rodar o comando npm install
+- instalar as bibliotecas: class-validator e class-transformer
+- instalar o prisma (ou outro client de banco): npm i -D prisma
+- rodar comando: npx prisma
+- acessar arquivo .env e colocar dados configuração mysql (se não tem, instale o banco)
+- acessar arquivo prisma/schema.prisma e alterar o provider para o banco que está utilizando
+- rodar comando: npx prisma db pull para atualizar o arquivo schema.prisma com a estrutura do banco (ou db generate caso queira criar pelo arquivo)
+- após qualquer atualização no arquivo schecma.prisma rodar o comando: npm prisma generate
