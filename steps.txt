@@ -2,6 +2,7 @@
 - entrar no diretório clonado e rodar o comando npm install
 - instalar as bibliotecas: class-validator e class-transformer
 - instalar o prisma (ou outro client de banco): npm i -D prisma
+- instalar o prima cliente: npm i @prima/client
 - rodar comando: npx prisma
 - acessar arquivo .env e colocar dados configuração mysql (se não tem, instale o banco)
 - acessar arquivo prisma/schema.prisma e alterar o provider para o banco que está utilizando
