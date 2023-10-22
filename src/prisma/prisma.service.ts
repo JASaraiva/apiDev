@@ -8,4 +8,6 @@ export class PrismaService extends PrismaClient implements OnModuleInit{
     async onModuleInit(){
         await this.$connect()
     }
+
+    //use app.enableShutdownHooks() to shotdow connections
 }
