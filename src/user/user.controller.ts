@@ -17,44 +17,27 @@ export class UserContoller{
 
     @Get()
     async list(){
-        return {users: []};
+        return this.userService.list();
     }
 
     @Get(':id')
     async readOne(@Param('id', ParseIntPipe) id: number){
-        return {
-                user: [], 
-                id
-            };
+        return this.userService.show(id);
     }
 
     @Put(':id')
-    async update(@Param('id', ParseIntPipe) id: number, @Body() { name, email, password } : UpdatePutUserDTO){
-        return {
-                method: 'PUT',
-                name, 
-                email, 
-                password,
-                id
-            };
+    async update(@Param('id', ParseIntPipe) id: number, @Body() data : UpdatePutUserDTO){
+        return this.userService.update(id, data);
             
     }
 
     @Patch(':id')
-    async updatePartial(@Param('id', ParseIntPipe) id: number, @Body() { name, email, password } : UpdatePatchUserDTO){
-        return {
-                method: 'PUT',
-                name, 
-                email, 
-                password,
-                id
-            };
+    async updatePartial(@Param('id', ParseIntPipe) id: number, @Body() data : UpdatePatchUserDTO){
+        return this.userService.updatePartial(id, data);
     }
 
     @Delete(':id')
     async delete(@Param('id', ParseIntPipe) id: number){
-        return {
-                id
-            };
+        return this.userService.delete(id);
     }
 }
