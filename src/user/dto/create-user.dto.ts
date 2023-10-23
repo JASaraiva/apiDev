@@ -17,4 +17,5 @@ export class CreateUserDTO{
     })
     password: string;
 
+    
 }
