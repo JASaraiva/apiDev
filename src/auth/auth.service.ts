@@ -18,7 +18,7 @@ export class AuthService{
     }
 
     async login(email: string, password: string){
-        const user = this.prisma.users.findFirst({
+        const user = await this.prisma.users.findFirst({
             where: {
                 email,
                 password
@@ -32,11 +32,32 @@ export class AuthService{
         return user;
     }
 
-    async forget(){
+    async forget(email: string){
 
+        const user = await this.prisma.users.findFirst({
+            where: {
+                email
+            }
+        })
+
+        if(!user){
+            throw new UnauthorizedException("E-mail incorreto");
+        }
+
+        return true;
     }
 
-    async reset(){
+    async reset(password: string, token: string){
 
+        const id = 0 //id extraido do token
+
+        await this.prisma.users.update({
+            where: {
+                id
+            },
+            data: {
+                password
+            }
+        })
     }
 }
