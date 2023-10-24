@@ -9,3 +9,4 @@
 - acessar arquivo prisma/schema.prisma e alterar o provider para o banco que está utilizando
 - rodar comando: npx prisma db pull para atualizar o arquivo schema.prisma com a estrutura do banco (ou db generate caso queira criar pelo arquivo)
 - após qualquer atualização no arquivo schecma.prisma rodar o comando: npm prisma generate
+- instalar o JWT: npm i @nestjs/jwt
