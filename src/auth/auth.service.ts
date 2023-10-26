@@ -1,9 +1,10 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { BadRequestException, Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { users } from "@prisma/client";
 import { PrismaService } from "src/prisma/prisma.service";
 import { AuthRegisterDto } from "./dto/auth-register.dto";
 import { UserService } from "src/user/user.service";
+import * as bcrypt from "bcrypt"
 
 @Injectable()
 export class AuthService{
@@ -27,19 +28,32 @@ export class AuthService{
         }
     }
 
-    async checkToken(){
-        
+    checkToken(token: string){
+        try{
+            const data = this.jwtService.verify(token, {
+                audience: 'users',
+                issuer: 'login'
+            })
+
+            return data
+        }catch(e){
+            throw new BadRequestException(e)
+        }
     }
 
     async login(email: string, password: string){
         const user = await this.prisma.users.findFirst({
             where: {
-                email,
-                password
+                email
             }
         })
 
         if(!user){
+            throw new UnauthorizedException("E-mail e/ou senha inválidos.");
+        }
+
+        
+        if(!await bcrypt.compare(password, user.password)){
             throw new UnauthorizedException("E-mail e/ou senha inválidos.");
         }
 
@@ -80,5 +94,15 @@ export class AuthService{
     async register(data: AuthRegisterDto){
 
         const user = await this.userService.create(data)
+    }
+
+    isValidToken(token: string){
+        
+        try{
+            this.checkToken(token)
+            return true
+        }catch(e){
+            return false;
+        }
     }
 }

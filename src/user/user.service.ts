@@ -3,6 +3,7 @@ import { PrismaService } from "src/prisma/prisma.service";
 import { CreateUserDTO } from "./dto/create-user.dto";
 import { UpdatePatchUserDTO } from "./dto/update-patch-user.dto";
 import { UpdatePutUserDTO } from "./dto/update-put-user.dto";
+import * as bcrypt from "bcrypt"
 
 @Injectable()
 export class UserService{
@@ -10,6 +11,10 @@ export class UserService{
     constructor(private readonly prisma: PrismaService){}
     
     async create(data: CreateUserDTO){
+        
+        data.password = await bcrypt.hash(data.password, await bcrypt.genSalt())
+
+
         return this.prisma.users.create({
             data,
             //e possivel recuperar os dados do registro inserido
@@ -42,6 +47,11 @@ export class UserService{
     }
 
     async updatePartial(id: number, data: UpdatePatchUserDTO){
+
+        if(data.password){
+         data.password = await bcrypt.hash(data.password, await bcrypt.genSalt())
+        }
+        
         return this.prisma.users.updateMany({
             where:{
                 id

@@ -10,3 +10,5 @@
 - rodar comando: npx prisma db pull para atualizar o arquivo schema.prisma com a estrutura do banco (ou db generate caso queira criar pelo arquivo)
 - após qualquer atualização no arquivo schecma.prisma rodar o comando: npm prisma generate
 - instalar o JWT: npm i @nestjs/jwt
+- instalar bcrypt para encriptar dados: npm i bcrypt
+- instalar os tipos da bcrypt com dep de dev: npm i -D @types/bcrypt
