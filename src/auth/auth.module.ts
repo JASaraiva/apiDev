@@ -9,7 +9,7 @@ import { UserModule } from "src/user/user.module";
 {
     imports : [
         JwtModule.register({
-        secret: 'Gfy]t_!_Bou4V#C0BPBoAt.aQvtIBLj1'
+        secret: process.env.JWT_SECRET
         }),
         UserModule,
         PrismaModule
