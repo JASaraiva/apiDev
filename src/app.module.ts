@@ -8,16 +8,17 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    UserModule, 
+    UserModule,
     AuthModule,
-    ThrottlerModule.forRoot([{
-      ttl: 60000,
-      limit: 100
-    }]),
-    ConfigModule.forRoot()
+    ThrottlerModule.forRoot([
+      {
+        ttl: 60000,
+        limit: 100,
+      },
+    ]),
+    ConfigModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-
 export class AppModule {}
